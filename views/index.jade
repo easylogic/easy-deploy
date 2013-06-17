@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  .container 
+    h1 Issues 
+      .btn-group
+        button.btn.btn-primary.btn-small.add-issue
+          i.glyphicon.glyphicon-plus 
+          | Add    
+    .row
+      .col.col-lg-6.main
+      .col.col-lg-6.detail
+    
+  
+  script.
+    require(['app/main'], function(Main){
+      Main.initialize();
+    })
+

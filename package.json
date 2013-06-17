@@ -1,0 +1,31 @@
+{
+  "name": "easy-deploy",
+  "version": "0.0.1",
+  "description" : "easy deploy system",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.2.6",
+    "jade": "*",
+    "less-middleware": "*",
+    "rsync" : "*",
+	"mongodb" : "*"
+  },
+  "jam": {
+        "baseUrl": "public",
+        "packageDir": "public/vendor",
+        "dependencies": {
+            "jquery": "*",
+            "underscore": "*",
+            "backbone" : "*",
+			"moment" : "*",
+			"text" : "*"
+        },
+        "config": {
+          "paths": {
+            "templates": "public/templates"
+          }
+        }
+    }  
+}

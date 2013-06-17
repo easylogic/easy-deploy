@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .container 
+    h1 Projects 
+      .btn-group
+        button.btn.btn-primary.btn-small.add-server
+          i.glyphicon.glyphicon-plus 
+          | Add
+    .row(style='position:relative')
+      .main.col.col-lg-6
+      .detail.col.col-lg-6(style='position:absolute; top:0px; left:600px;')
+  
+  script.
+    require(['jquery', 'app/project'], function($, Project){
+      Project.initialize();
+      
+      $(window).scroll(function(){
+        $(".detail").css({ top : $("body").scrollTop()});
+      })
+    })
+

@@ -1,0 +1,16 @@
+doctype 5
+html
+  head
+    title Deployment
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.css')
+    script(src="/javascript/util.js")
+    script(src="/vendor/require.js")
+  body
+    
+    .container
+      .navbar
+        a.navbar-brand(href='/') Deploy System
+        ul.nav.navbar-nav
+          li: a(href='/') Issues
+          li: a(href='/project') Projects
+    block content
