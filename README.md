@@ -1,0 +1,4 @@
+easy-deploy
+===========
+
+deploy site
