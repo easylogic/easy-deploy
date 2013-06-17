@@ -1,0 +1,67 @@
+<div class="modal-dialog" style='max-width:600px'>
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title">project Info</h4>
+    </div>
+    <div class="modal-body">
+		 <form class="form-horizontal">
+		  <div class="row">
+		    <label for="inputEmail" class="col col-lg-3 control-label">Title</label>
+		    <div class="col col-lg-9">
+		      <input type="text" id="title" placeholder="Title" class='project' value="<%=title%>">
+		    </div>
+		  </div>
+		  <div class="row">
+		    <label for="" class="col col-lg-3 control-label">Summary</label>
+		    <div class="col col-lg-9">
+		      <textarea rows="2" id="text" placeholder="Summary" class='project'><%=text%></textarea>
+		    </div>
+		  </div>
+		  <div class="row">
+		    <label for="" class="col col-lg-3 control-label">Source</label>
+		    <div class="input-group col col-lg-9" style='padding-left:15px;padding-right:15px;'>
+			  <div class="input-group-btn">
+			    <button type="button" class="btn btn-primary dropdown-toggle project" id="type" value="<%=type||'svn'%>" data-toggle="dropdown" style='width:80px;'><span class='text'>svn</span> <span class="caret pull-right"></span></button>
+			    <ul class="dropdown-menu" style='min-width:80px;width:80px'>
+			      <li><a href="#" class='type-btn' data-value='svn'>svn</a></li>
+			      <li><a href="#" class='type-btn' data-value='git'>git</a></li>
+			    </ul>
+			  </div><!-- /btn-group -->
+			  <input type="text" id="location" class='project' placeholder="https://10.200.164.40:8443/svn/madplus/trunk/bridge.tictoc.net" value="<%=location%>">
+		    </div>
+		  </div>
+		  
+		  <hr />
+
+		  <ul class="nav nav-tabs project-tab">		  
+		  <% for(var key in server) {%>
+			  <li <% if (key == 'dev') {%>class='active'<% }%>><a href="#server-<%=key%>"><%=key%></a></li>
+		  <% } %>
+		  </ul>		  
+		  
+		  <div class='tab-content'>
+		  <% for(var key in server) { %>
+			<div class='tab-pane <% if (key == 'dev') {%>active<% }%>' id='server-<%=key%>'>
+				<div class='alert alert-info' style='margin-top:10px;'><%= key %> 서버 정보를 입력해주세요.</div>		  	
+		    	<div class='<%=key%>-list'>
+		    		<% if (typeof server[key] == 'object') { %>
+		    			<% for (var i in server[key]) { %>
+		    			<input type="text" name="server.<%=key%>[]"  class="input-small project" style='margin-bottom:2px;' value="<%= server[key][i] %>">
+		    			<%  } %>
+		    		<% } else {%>
+			    	<input type="text" name="server.<%=key%>[]"  class="input-small project" style='margin-bottom:2px;'>
+			    	<% } %>
+		    	</div>
+		      	<a class='btn btn-info btn-small add-target-ip' data-target="<%=key%>"><span class="glyphicon glyphicon-plus"></span> Add Target</a>
+	      	</div>
+		  <% } %>
+		  </div>
+		  
+		</form>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn btn-primary save-btn">Save & Update</a>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dalog -->

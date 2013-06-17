@@ -1,0 +1,136 @@
+<div >
+
+<div class="panel panel-primary col col-lg-12">
+  <div class="panel-heading ">
+  	<span class='title'><%= title %></span>
+  		 <a href="#" class='btn btn-danger delete-btn btn-small pull-right' style='display: none;margin-left:5px;'>Delete</a>  	
+  		 <a href="#" class='btn btn-default modify-btn btn-small pull-right' style='display: none;'>Modify</a>
+  </div>
+  <div class="text"><%= text %></div>
+</div>
+
+</div>
+
+
+<div>
+<div class="panel panel-info col col-lg-12">
+  <div class="project_name list-group  list-group-flush" style='margin: -15px -15px -15px;'></div>
+</div>
+	
+</div>
+<div>
+<div class="panel panel-danger col col-lg-12">
+  <div class="panel-heading ">
+  	<span class='title'>Revision Info <span class='label label-success revision-number'></span></span>
+  	<a href="#update" class='btn btn-danger update-revision-btn btn-small pull-right' style='margin-left:5px;'>Update</a> 
+  	<a href="#update" class='btn btn-primary reload-revision-btn btn-small pull-right' >Reload</a> 
+  </div>
+  
+  <select class='revision-list'>
+  	<option value=''>Recently Revision</option>
+  </select>
+</div>
+	
+</div>
+
+<div>
+<div class="panel panel-success col col-lg-12">
+  <div class="panel-heading ">
+  	<span class='title'>File Info</span>
+  	<a href="#update" class='btn btn-danger update-file-btn btn-small pull-right' style='margin-left:5px;'>Update</a> 
+  	 	
+  	<a href="#add" class='btn btn-primary add-file-btn btn-small pull-right'>Add</a>
+
+  </div>
+  <div class="file_list" style="position:relative;">
+  	<textarea class='files' rows="10"><%= files %></textarea>
+  	<div class='server-list-layer' style='position:absolute;z-index:999;height:260px;width:100%;background:white;top:0px;opacity:0.8;display:none;'>
+  		<form style='margin-left:20px;margin-top: 10px;height:200px;overflow:auto;'>
+  			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" value="">
+			    Option one is this and that&mdash;be sure to include why it's great
+			  </label>
+			</div>
+  			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" value="">
+			    Option one is this and that&mdash;be sure to include why it's great
+			  </label>
+			</div>
+  			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" value="">
+			    Option one is this and that&mdash;be sure to include why it's great
+			  </label>
+			</div>
+  			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" value="">
+			    Option one is this and that&mdash;be sure to include why it's great
+			  </label>
+			</div>
+  			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" value="">
+			    Option one is this and that&mdash;be sure to include why it's great
+			  </label>
+			</div>
+  			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" value="">
+			    Option one is this and that&mdash;be sure to include why it's great
+			  </label>
+			</div>
+  			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" value="">
+			    Option one is this and that&mdash;be sure to include why it's great
+			  </label>
+			</div>
+  			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" value="">
+			    Option one is this and that&mdash;be sure to include why it's great
+			  </label>
+			</div>
+  			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" value="">
+			    Option one is this and that&mdash;be sure to include why it's great
+			  </label>
+			</div>
+  		</form>
+  		
+  	</div>
+  </div>
+  <div class='panel-footer'>
+
+  	<div class='deploy-buttons pull-right' style='margin-top:5px;'>
+  		
+  	</div>  
+  	<div class='deploy-buttons-panel' style='width:100%;display:none;margin-top:5px;height:24px;background:#eee;'>
+  		<div class="progress progress-striped active">
+  			<div class="progress-bar" style="width: 100%"></div>
+		</div>
+  	</div>	
+  </div>
+</div>
+	
+</div>
+
+
+
+<div>
+
+<div class="panel col col-lg-12 deploy-log">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Deploy Log</div>
+  
+  <p class='first'></p>
+
+  <!-- List group -->
+  <ul class="list-group list-group-flush deploy-log-list"></ul>
+</div>
+	
+</div>

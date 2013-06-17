@@ -1,0 +1,42 @@
+<div >
+	
+	<div class="panel panel-primary">
+	  <div class="panel-heading ">
+	  	<span class='title'><%= title %></span>
+	  	<a href="#" class='btn btn-default modify-btn btn-small pull-right' style='display: none;'>Modify</a>
+	  </div>
+	  <div class="text"><%= text %></div>
+	</div>
+	
+</div>
+
+<div >
+	
+	<div class="panel panel-success">
+	  <div class="text"><span class='label' style='width:100px;display:inline-block;'>Type</span> <span class="type"><%= type %></span></div>
+	  <div class="text"><span class='label' style='width:100px;display:inline-block;'>Location</span> <span class='location'><%= location %></span></div>
+	</div>
+	
+</div>
+
+<div>
+  <ul class="nav nav-tabs project-tab">		  
+  <% for(var key in server) {%>
+  	<li <% if (key == 'dev') {%>class='active'<% }%>><a href="#server-detail-<%=key%>"><%=key%></a></li>
+  <% } %>
+  </ul>
+  
+  <div class='tab-content'>
+  <% for(var key in server) { %>
+	<div class='tab-pane <% if (key == 'dev') {%>active<% }%>' id='server-detail-<%=key%>' style='height:320px;overflow: auto'>
+    	<div class='<%=key%>-list list-group' style='margin-top:5px;'>
+		<% for (var i in server[key]) { %>
+  			<div class='list-group-item'><%= server[key][i] %></div>
+		<%  } %>
+
+    	</div>
+  	</div>
+  <% } %>
+  </div>  
+  
+</div>  	

@@ -1,0 +1,54 @@
+<div class="modal-dialog" style='max-width:800px'>
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title">Issue Maker</h4>
+    </div>
+    <div class="modal-body">
+		 <form class="form-horizontal">
+		  <div class="row">
+		    <label for="inputEmail" class="col col-lg-3 control-label">Title</label>
+		    <div class="col col-lg-9">
+		      <input type="text" id="title" placeholder="Title" class='issue' value="<%=title%>">
+		    </div>
+		  </div>
+		  <div class="row">
+		    <label for="inputEmail" class="col col-lg-3 control-label">Author</label>
+		    <div class="col col-lg-9">
+		      <input type="text" id="author" placeholder="Author" class='issue' value="<%=author%>">
+		    </div>
+		  </div>		  
+		  <div class="row">
+		    <label for="inputEmail" class="col col-lg-3 control-label">CC</label>
+		    <div class="col col-lg-9">
+		      <input type="text" id="cc" placeholder="cc" class='issue' value="<%=cc%>">
+		    </div>
+		  </div>		  
+		  <div class="row">
+		    <label for="" class="col col-lg-3 control-label">Summary</label>
+		    <div class="col col-lg-9">
+		      <textarea rows="2" id="text" placeholder="Summary" class='issue'><%=text%></textarea>
+		    </div>
+		  </div>		 
+		  <hr />
+		  <div class="row">
+		    <label for="inputEmail" class="col col-lg-3 control-label">Project</label>
+		    <div class="col col-lg-9">
+		      <select id="project" class='issue'>
+		      	<option value=''>Select Project</option>
+		      </select>
+		    </div>
+		  </div>
+		  <div class="row">
+		    <label for="" class="col col-lg-3 control-label">File List</label>
+		    <div class="col col-lg-9">
+		      <textarea rows="5" id="files" placeholder="File List" class='issue'><%=files%></textarea>
+		    </div>
+		  </div>	  		   	  
+		</form>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn btn-primary save-btn">Create</a>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dalog -->
