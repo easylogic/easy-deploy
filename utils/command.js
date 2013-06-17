@@ -1,16 +1,11 @@
+var config = require('../config');
 var Rsync = require('rsync');
 var log = require('./log')
 var fs = require('fs');
 var exec = require('child_process').exec;
-var config = {
-	root : './dist',
-	auth :  { 
-		id : '',
-		pass : ''
-	}
-}
 
-var auth = " --username " + config.auth.id + " --password \"" + config.auth.pass + "\" ";
+
+var auth = " --username " + config.svn.id + " --password \"" + config.svn.password + "\" ";
 
 function deploy_rsync(log, id, rsync_opt, dist_dir, callback) {
 	

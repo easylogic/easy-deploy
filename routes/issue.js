@@ -1,10 +1,11 @@
+var config = require('../config');
 var mongo = require('mongodb');
 
 var Server = mongo.Server,
 	Db = mongo.Db,
 	BSON = mongo.BSONPure;
 	
-var server = new Server('localhost', 27017, { auto_reconnect : true });
+var server = new Server(config.db.host, config.db.port, { auto_reconnect : true });
 
 db = new Db('deploy', server);
 
