@@ -21,3 +21,16 @@ jam install   # jamjs
 cd easy-deploy && node app.js 
 
 ```
+
+# Config 
+
+```javascript 
+// in utils/command.js 
+var config = {
+  root : './dist',  // svn checkout directory 
+	auth :  { 
+		id : '',    // svn id 
+		pass : ''   // svn pass 
+	}
+}
+```
