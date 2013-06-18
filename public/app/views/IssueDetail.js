@@ -88,19 +88,25 @@ function($, _, Backbone, moment, DetailTpl, IssueForm, ServerForm, ProjectItem, 
 				
 				var files = this.$(".files").val().split("\n");
 				var temp = [];
+
+                var fullsync = $(e.currentTarget).data('fullsync');
 				
-				for(var i in files) {
-					var file = $.trim(files[i]);
-					if (file == "") continue;
-					if (file.indexOf("#") == 0) continue;
-					
-					temp.push(file);
-				}
+                if (!fullsync) {
+    				for(var i in files) {
+	    				var file = $.trim(files[i]);
+		    			if (file == "") continue;
+			    		if (file.indexOf("#") == 0) continue;
+				    	
+					    temp.push(file);
+    				}
 				
-				if (temp.length == 0) {
-					alert('File is not exists.')
-					return ;
-				}
+	    			if (temp.length == 0) {
+		    			alert('File is not exists.')
+			    		return ;
+				    }
+                } 
+
+
 				var target = $(e.currentTarget).data('target');
 				var self = this; 
 				var btn_type = {
@@ -114,6 +120,11 @@ function($, _, Backbone, moment, DetailTpl, IssueForm, ServerForm, ProjectItem, 
 					"Really deploy?",
 					temp.join("\n")
 				].join("\r\n");
+
+                if (fullsync) {
+                    msg = "Really Deploy?";
+                }
+
 				if (!confirm(msg)) return;
 												
 				this.$(".deploy-buttons").toggle();
@@ -126,7 +137,8 @@ function($, _, Backbone, moment, DetailTpl, IssueForm, ServerForm, ProjectItem, 
 
 				$.post("/deploy", { 
 					issue_id : this.model.id,
-					target : target 
+					target : target,
+                    fullsync : fullsync
 				}, function(data) {
 					if (data) {
 						self.reloadDeployLog()
@@ -322,12 +334,18 @@ function($, _, Backbone, moment, DetailTpl, IssueForm, ServerForm, ProjectItem, 
 			
 			for(var key in server) {
 				if (server[key].length > 0) {
-					var $btn = $("<a class='btn btn-small target-btn' />").html(key).addClass('btn-' + btn_type[key]).data('target', key).css({
-						'margin-left' : '5px',
-						'width' : '100px'
+
+
+                    var $group = $("<div class='btn-group' />");
+
+					var $btn1 = $("<a class='btn btn-small target-btn' />").html(key).addClass('btn-' + btn_type[key]).data('target', key).css({
 					});
-					
-					$dom.append($btn);	
+					var $btn2 = $("<a class='btn btn-small target-btn' />").html("Full Sync").addClass('active btn-' + btn_type[key]).data('target', key).css({
+					}).data('fullsync', true);
+				
+                        
+					$group.append($btn1, $btn2);	
+					$dom.append($group);	
 				}
 			}
 			

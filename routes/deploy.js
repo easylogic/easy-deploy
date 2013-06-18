@@ -26,7 +26,8 @@ exports.run = function(req, res){
 			
 			db.collection('projects', function(err, projects){
 				projects.findOne({ _id : new BSON.ObjectID(issue.project)}, function(err, project) {
-					
+				
+                    issue.fullsync = data.fullsync;	
 					command.deploy(log, project, issue, data.target, {
 						success : function() {
 							addLog(issue._id, log.join("\r\n"));

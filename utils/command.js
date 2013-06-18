@@ -14,13 +14,14 @@ function deploy_rsync(log, id, rsync_opt, dist_dir, callback) {
 	rsync.set('rsync-path', '/usr/bin/rsync');
 	rsync.set('delete');
 	
-	//log.push(rsync.command()); 
+	console.log(rsync.command()); 
 		
 	rsync.execute(function(error, stdout) {
 		if (error) {
 			log.push("error : " + rsync_opt.source , error+""); 
 		} else {
 			log.push("success : " + rsync_opt.source.replace(dist_dir + "/", "")); 
+			log.push(stdout); 
 		}
 		
 		callback();
@@ -34,28 +35,36 @@ function deploy_flow (log, project, issue, target, opt) {
 		
 		var temp = [];
 		var dist_list = [];
-		
-		for(var key in files) {
-			var file = files[key].trim();
+        var run  = "svn update " + auth + "  "+ dist_dir;
+
+
+        if (issue.fullsync) {
+
+        } else {
+    		for(var key in files) {
+		    	var file = files[key].trim();
+	    		
+    			if (file == "") continue;
+	    		if (file.indexOf("#") == 0) continue;
 			
-			if (file == "") continue;
-			if (file.indexOf("#") == 0) continue;
-			
-			temp.push(file);
-			dist_list.push(dist_dir + "/" + file);
-		}
+    			temp.push(file);
+	    		dist_list.push(dist_dir + "/" + file);
+		    }
 		
-		files = temp;
-		dist_files = dist_list;
+    		files = temp;
+	    	dist_files = dist_list;
 		
 		// log svn update
-		var run = "svn update " + auth + " "+ dist_list.join(" ");
+    		var run = "svn update " + auth + " "+ dist_list.join(" ");
 		
-		if (issue.revision) {
-			run = "svn update " + auth + "  -r" + issue.revision + " "+ dist_dir;
-		} else {
-			run = "svn update " + auth + " "+ dist_list.join(" ");
-		}
+	        if (issue.revision) {
+    			run = "svn update " + auth + "  -r" + issue.revision + " "+ dist_dir;
+	    	} else {
+		    	run = "svn update " + auth + " "+ dist_list.join(" ");
+    		}
+
+        }
+		
 		
 		log.push(run.replace(auth, ""));
 
@@ -69,32 +78,56 @@ function deploy_flow (log, project, issue, target, opt) {
 				
 				var log_count = 0;
 				var log_max = servers.length * files.length;
+                var log_max_2 = servers.length;
 
 				for(var i in servers) {
 					var arr = servers[i].split(":");
 
 					log.push("target : " + servers[i], "");
-					
-					for (var j in files) {
+				
+                    if (issue.fullsync) {
+        					var rsync_opt = {
+		    				  source:      dist_dir + "/" ,
+			    			  destination: servers[i] ,
+				    		  exclude:     ['.git', '.svn'],
+					    	  flags:       'avz',
+    						  shell:       'ssh'
+	    					}
 						
-						var rsync_opt = {
-						  source:      dist_dir + "/" + files[j],
-						  destination: servers[i] + "/" + files[j],
-						  exclude:     ['.git', '.svn'],
-						  flags:       'avz',
-						  shell:       'ssh'
-						}
-						
-						deploy_rsync(log, issue._id, rsync_opt, dist_dir, function() {
-							log_count++;
+		    				deploy_rsync(log, issue._id, rsync_opt, dist_dir, function() {
+			    				log_count++;
 							
-							if (log_count == log_max) {
-								//console.log('end')
-								opt.success();
-							}							
-						});
+				    			if (log_count == log_max_2) {
+					    			//console.log('end')
+						    		opt.success();
+							    }							
+    						});
+                    
+                    } else {
+                        
+                     	
+    					for (var j in files) {
+						
+	    					var rsync_opt = {
+		    				  source:      dist_dir + "/" + files[j],
+			    			  destination: servers[i] + "/" + files[j],
+				    		  exclude:     ['.git', '.svn'],
+					    	  flags:       'avz',
+    						  shell:       'ssh'
+	    					}
+						
+		    				deploy_rsync(log, issue._id, rsync_opt, dist_dir, function() {
+			    				log_count++;
+							
+				    			if (log_count == log_max) {
+					    			//console.log('end')
+						    		opt.success();
+							    }							
+    						});
 												
-					}
+	    				}
+
+                    }
 			
 				}		
 			} else {
